@@ -1,0 +1,36 @@
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end; /* avatar and button on the right */
+  gap: 12px;
+  padding: 12px 16px;
+  background: var(--header-bg, #ffffff);
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+}
+
+.avatar img {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.sign-in-button {
+  background: var(--primary, #2563eb);
+  color: #fff;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* small screens: reduce padding and spacing */
+@media (max-width: 480px) {
+  .header {
+    padding: 8px 10px;
+    gap: 8px;
+  }
+  .avatar img { width: 30px; height: 30px; }
+  .sign-in-button { padding: 6px 10px; font-size: 14px; }
+}
