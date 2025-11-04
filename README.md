@@ -4,35 +4,6 @@ This is a simple Kanban board application built with React. The app allows users
 
 ## Project Structure
 
-The project is organized as follows:
-
-```
-react-kanban-app
-├── public
-│   ├── index.html        # Main HTML file for the React application
-│   └── manifest.json     # Metadata about the application
-├── src
-│   ├── index.tsx         # Entry point of the React application
-│   ├── App.tsx           # Main App component
-│   ├── components         # Contains all React components
-│   │   ├── Header        # Header component with avatar and sign-in button
-│   │   │   ├── Header.tsx
-│   │   │   ├── Avatar.tsx
-│   │   │   └── SignInButton.tsx
-│   │   ├── Main          # Main component with lists and command input
-│   │   │   ├── Main.tsx
-│   │   │   ├── CommandInput.tsx
-│   │   │   └── lists
-│   │   │       ├── TodoList.tsx
-│   │   │       ├── InProgressList.tsx
-│   │   │       └── DoneList.tsx
-│   └── styles            # CSS styles for the application
-│       └── App.css
-├── package.json          # npm configuration file
-├── tsconfig.json         # TypeScript configuration file
-└── README.md             # Project documentation
-```
-
 ## Getting Started
 
 To get started with the project, follow these steps:
