@@ -32,9 +32,10 @@ To get started with the project, follow these steps:
 
 ## Features
 
-- User authentication with a sign-in button.
-- Task management with three lists: TODO, In Progress, and Done.
-- A prominent input field for user commands.
+- Account Registration 
+- Basic AI interaction to generate kahnbahn cards
+- Ability order cards in the board
+ 
 
 ## Contributing
 
@@ -43,3 +44,61 @@ Contributions are welcome! Please open an issue or submit a pull request for any
 ## License
 
 This project is licensed under the MIT License. See the LICENSE file for details.
+
+## CI/CD Pipeline (simple overview)
+
+This project now includes a simple CI and CD pipeline using GitHub Actions. The workflows are in `.github/workflows/`.
+
+Pipeline points (clear mapped names used in the workflow steps):
+
+- "1 - Type Check (typecheck)": runs `npm run typecheck` — verifies TypeScript types.
+- "2 - Tests (test:ci)": runs `npm run test:ci` — runs the test suite in CI mode.
+- "3 - Build (build)": runs `npm run build` — produces the production-ready `build/` folder.
+- "Upload build artifact": uploads the `build/` folder as `build-artifact` (used by CI).
+- "3 - Simulated Deploy": a placeholder deploy step used by the CD workflow (replace with a real deploy action for your host).
+
+Files added:
+
+- `.github/workflows/ci.yml` — runs on push and pull requests (and can be run manually). Performs install, typecheck, tests, build, then uploads the build artifact.
+- `.github/workflows/cd.yml` — runs on push to `main` (and can be run manually). Performs install, typecheck, build, and then runs a simulated deploy step.
+
+How to run a full test locally (fast check before pushing):
+
+1. From the project root, install dependencies:
+
+```bash
+npm ci
+```
+
+2. Run the full sequence locally (typecheck, tests in CI mode, build):
+
+```bash
+npm run typecheck
+npm run test:ci
+npm run build
+```
+
+If all commands complete without error you have effectively run the same steps the CI workflow runs.
+
+How to run the workflows on GitHub (novice-friendly):
+
+1. Commit the new workflow files and push to your repository:
+
+```bash
+git add .github/workflows
+git commit -m "chore(ci): add CI and CD GitHub Actions workflows"
+git push origin main
+```
+
+2. Open your repository on GitHub and go to the Actions tab. You should see the `CI Pipeline` and `CD Pipeline (Simulated Deploy)` workflows.
+
+3. To test CI for a branch or PR: push a branch and either open a pull request or run the `CI Pipeline` manually via the Actions UI (there's a "Run workflow" button because `workflow_dispatch` is enabled).
+
+4. To test CD: push to the `main` branch (or run the CD workflow manually). The CD workflow will run a build and then run the simulated deploy step.
+
+Notes and next steps:
+
+- The CD workflow currently simulates deployment. Replace the simulated deploy step with a real deployment action or script specific to your hosting provider (for example, GitHub Pages, Netlify, Vercel, S3 + CloudFront, etc.).
+- If you want to see the artifacts from a successful CI run, open that workflow run in GitHub Actions and download the `build-artifact` from the run summary.
+
+If you'd like, I can next wire up a real deployment target (GitHub Pages or Netlify) and add a small test to strengthen CI (for example, a Jest test for a component). Let me know which provider you'd prefer.
