@@ -102,3 +102,42 @@ Notes and next steps:
 - If you want to see the artifacts from a successful CI run, open that workflow run in GitHub Actions and download the `build-artifact` from the run summary.
 
 If you'd like, I can next wire up a real deployment target (GitHub Pages or Netlify) and add a small test to strengthen CI (for example, a Jest test for a component). Let me know which provider you'd prefer.
+
+## Security & Scheduled Audits
+
+Short summary:
+
+- Current status: CI audit shows 2 moderate vulnerabilities originating from `react-scripts` -> `webpack-dev-server` (development tooling). High and critical issues were resolved during dependency maintenance, but these two moderate issues remain because they are transitive dev-dependencies of Create React App.
+- Impact: these are development-only vulnerabilities and do not affect production bundles. They should be monitored and re-evaluated when upstream packages (notably `react-scripts`) release fixes.
+
+What we do in this repo:
+
+- We run a scheduled audit weekly in GitHub Actions. The audit produces an `audit.json` artifact attached to the workflow run so you can inspect the current vulnerability counts without running anything locally.
+- We record the current decision to keep `react-scripts` (stable, well-supported) and accept the remaining development-only moderate advisories until upstream fixes or a migration away from CRA is performed.
+
+How to review the audit locally:
+
+1. Mirror the CI install and run the audit:
+
+```bash
+# remove local modules
+rm -rf node_modules
+
+# install exactly from lockfile (CI-like)
+npm ci
+
+# run audit and save JSON
+npm audit --json > audit.json
+
+# inspect summary (if you have jq):
+jq '.metadata.vulnerabilities' audit.json
+```
+
+How to change the policy:
+
+- If you prefer to remove the dev-only advisories, options are:
+   - Migrate off `react-scripts` to a modern bundler (Vite) — recommended for long-term maintenance.
+   - Eject Create React App and manually upgrade dev tooling — more work and less reversible.
+   - Keep `react-scripts` and monitor for upstream fixes (current approach).
+
+If you'd like, I can open a follow-up PR that migrates the project to Vite and removes the transitive dev vulnerabilities (this requires updating scripts and minor code adjustments).
