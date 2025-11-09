@@ -1,0 +1,35 @@
+/* logout-button.css */
+.logout-button {
+  padding: 14px 15px;
+  font-weight: 600;
+  font-size: 16px;
+  border-radius: 14px; /* curved edges */
+  background-color: #ffffff; /* button background */
+  color: #333333; /* text color */
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  /* transition: all 0.3s ease; */
+  border: 1px solid transparent;
+}
+
+/* Gradient border effect */
+.logout-button::before {
+  content: '';
+  position: absolute;
+  /* top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px; */
+  background: linear-gradient(#8b5cf6, #65058b); /* gradient colors */
+  z-index: -1;
+  border-radius: 14px; /* slightly larger to create border effect */
+}
+
+/* Hover effect */
+.logout-button:hover {
+  background: linear-gradient(180deg, #8b5cf6, #7a20db);
+  padding: 14px 15px;
+  color: white;
+  border: 1px solid transparent;
+}

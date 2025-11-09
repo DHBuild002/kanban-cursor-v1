@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import Avatar from './Avatar';
 import './Header.css';
+import './LogOutBtn.css';
 import { useAuth } from '../../context/AuthContext'; // Import useAuth
 
 const Header: React.FC = () => {
@@ -18,7 +19,7 @@ const Header: React.FC = () => {
                 {isAuthenticated ? (
                     <>
                         {/* Optionally display user info here */}
-                        <button onClick={handleLogout}>Logout</button>
+                        <button className='logout-button' onClick={handleLogout}>Logout</button>
                     </>
                 ) : (
                     <>
