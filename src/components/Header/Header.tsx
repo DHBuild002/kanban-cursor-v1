@@ -1,13 +1,32 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import Avatar from './Avatar';
-import SignInButton from './SignInButton';
-import './Header.css'; // Assuming you will create a CSS file for styling
+import './Header.css';
+import { useAuth } from '../../context/AuthContext'; // Import useAuth
 
 const Header: React.FC = () => {
+    const { isAuthenticated, logout } = useAuth();
+
+    const handleLogout = () => {
+        logout();
+    };
+
     return (
         <header className="header">
             <Avatar />
-            <SignInButton />
+            <nav>
+                {isAuthenticated ? (
+                    <>
+                        {/* Optionally display user info here */}
+                        <button onClick={handleLogout}>Logout</button>
+                    </>
+                ) : (
+                    <>
+                        <Link to="/login">Login</Link>
+                        <Link to="/register">Register</Link>
+                    </>
+                )}
+            </nav>
         </header>
     );
 };
