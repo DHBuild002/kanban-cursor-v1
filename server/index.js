@@ -1,17 +1,18 @@
 const express = require('express');
 const fs = require('fs');
+const path = require('path'); // Import the path module
 const bcrypt = require('bcrypt');
 const { v4: uuidv4 } = require('uuid');
 const jwt = require('jsonwebtoken');
-const authenticateToken = require('./middleware/auth'); // Import the authentication middleware
-const cors = require('cors'); // Import the cors middleware
+const authenticateToken = require('./middleware/auth');
+const cors = require('cors');
 
 const app = express();
 const port = process.env.PORT || 3001;
-const USERS_FILE = './data/users.json';
-const JWT_SECRET = process.env.JWT_SECRET || 'supersecretjwtkey'; // Use environment variable for production
+const USERS_FILE = path.join(__dirname, 'data/users.json'); // Use absolute path
+const JWT_SECRET = process.env.JWT_SECRET || 'supersecretjwtkey';
 
-app.use(cors()); // Use the cors middleware
+app.use(cors());
 app.use(express.json());
 
 app.get('/', (req, res) => {
@@ -98,7 +99,7 @@ app.post('/login', (req, res) => {
         return res.status(400).send('Invalid credentials');
       }
 
-      const token = jwt.sign({ id: user.id, email: user.email }, JWT_SECRET, { expiresIn: '1h' });
+      const token = jwt.sign({ id: user.id, email: user.email, username: user.username }, JWT_SECRET, { expiresIn: '1h' });
       res.json({ token });
     });
   });
