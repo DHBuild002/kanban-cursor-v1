@@ -2,6 +2,36 @@
 
 This is a simple Kanban board application built with React. The app allows users to manage tasks across three different states: TODO, In Progress, and Done.
 
+## Authentication
+
+This project uses Supabase for authentication. To get started, you will need to create a Supabase project and obtain your project URL and anon key.
+
+### Setup
+
+1.  Create a `.env` file in the root of the project and add the following:
+
+    ```
+    REACT_APP_SUPABASE_URL="YOUR_SUPABASE_URL"
+    REACT_APP_SUPABASE_ANON_KEY="YOUR_SUPABASE_ANON_KEY"
+    ```
+
+2.  Create a `.env` file in the `server` directory and add the following:
+
+    ```
+    SUPABASE_URL="YOUR_SUPABASE_URL"
+    SUPABASE_ANON_KEY="YOUR_SUPABASE_ANON_KEY"
+    ```
+
+3.  Replace `"YOUR_SUPABASE_URL"` and `"YOUR_SUPABASE_ANON_KEY"` with your actual Supabase project URL and anon key.
+
+4.  In your Supabase project dashboard, go to **Authentication** > **Providers** and enable the **Email** provider.
+
+5.  In **Authentication** > **Settings**, set the following:
+    *   **Site URL**: The URL of your application (e.g., `http://localhost:3000`)
+    *   **Redirect URLs**: Any additional URLs you want to allow redirects to after authentication.
+    *   **Session duration**: Set this to 1 hour (3600 seconds).
+    *   **Inactivity timeout**: Set this to 45 minutes.
+
 ## Project Structure
 
 ## Getting Started

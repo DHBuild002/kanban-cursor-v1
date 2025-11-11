@@ -1,55 +1,34 @@
 import React, { createContext, useState, useContext, useEffect, ReactNode } from 'react';
-import { jwtDecode } from 'jwt-decode'; // Correct import for jwt-decode
-
-interface User {
-  id: string;
-  email: string;
-  username: string;
-}
+import { Session, User } from '@supabase/supabase-js';
+import { supabase } from '../supabaseClient';
 
 interface AuthContextType {
-  token: string | null;
+  session: Session | null;
   user: User | null;
   isAuthenticated: boolean;
-  login: (newToken: string) => void;
-  logout: () => void;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-  const [token, setToken] = useState<string | null>(localStorage.getItem('token'));
+  const [session, setSession] = useState<Session | null>(null);
   const [user, setUser] = useState<User | null>(null);
-  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(!!token);
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
 
   useEffect(() => {
-    if (token) {
-      try {
-        const decodedUser: User = jwtDecode(token);
-        setUser(decodedUser);
-        setIsAuthenticated(true);
-      } catch (error) {
-        console.error("Invalid token:", error);
-        logout(); // Clear invalid token
-      }
-    } else {
-      setIsAuthenticated(false);
-      setUser(null);
-    }
-  }, [token]);
+    const { data: authListener } = supabase.auth.onAuthStateChange((event, session) => {
+      setSession(session);
+      setUser(session?.user ?? null);
+      setIsAuthenticated(!!session);
+    });
 
-  const login = (newToken: string) => {
-    localStorage.setItem('token', newToken);
-    setToken(newToken);
-  };
-
-  const logout = () => {
-    localStorage.removeItem('token');
-    setToken(null);
-  };
+    return () => {
+      authListener.subscription.unsubscribe();
+    };
+  }, []);
 
   return (
-    <AuthContext.Provider value={{ token, user, isAuthenticated, login, logout }}>
+    <AuthContext.Provider value={{ session, user, isAuthenticated }}>
       {children}
     </AuthContext.Provider>
   );

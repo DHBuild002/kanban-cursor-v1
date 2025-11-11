@@ -1,6 +1,10 @@
 import React from 'react';
 
-const InProgressList: React.FC = () => {
+interface InProgressListProps {
+  userData: any;
+}
+
+const InProgressList: React.FC<InProgressListProps> = ({ userData }) => {
     return (
         <div className="list">
             <h3 className="list-title">In Progress</h3>

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../../context/AuthContext';
+import { supabase } from '../../supabaseClient';
 import './Auth.css'; // Import the new CSS file
 
 const Login: React.FC = () => {
@@ -8,28 +8,21 @@ const Login: React.FC = () => {
   const [password, setPassword] = useState('');
   const [error, setError] = useState<string | null>(null);
   const navigate = useNavigate();
-  const { login } = useAuth();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError(null);
 
     try {
-      const response = await fetch('http://localhost:3001/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ email, password }),
+      const { error } = await supabase.auth.signInWithPassword({
+        email,
+        password,
       });
 
-      if (!response.ok) {
-        const errorData = await response.text();
-        throw new Error(errorData || 'Login failed');
+      if (error) {
+        throw error;
       }
 
-      const data = await response.json();
-      login(data.token);
       navigate('/');
     } catch (err: any) {
       setError(err.message);

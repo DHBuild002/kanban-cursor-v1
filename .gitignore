@@ -2,6 +2,7 @@
 
 # dependencies
 /node_modules
+/server/node_modules
 /.pnp
 .pnp.js
 
@@ -32,3 +33,6 @@ audit.json
 
 # Backup files
 *.backup
+
+#Test Credentials
+test-credentials.json

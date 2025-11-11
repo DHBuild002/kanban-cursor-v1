@@ -88,3 +88,8 @@
   color: #dc3545;
   margin-top: 1rem;
 }
+
+.success-message {
+    color: #333;
+    margin-top: 1rem;
+}
