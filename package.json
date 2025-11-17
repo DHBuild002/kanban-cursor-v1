@@ -34,7 +34,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "jest --config jest.config.js",
     "test:ci": "CI=true react-scripts test --watchAll=false --runInBand",
     "typecheck": "tsc --noEmit",
     "eject": "react-scripts eject",
@@ -57,5 +57,12 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@babel/preset-env": "^7.28.5",
+    "@babel/preset-react": "^7.28.5",
+    "@babel/preset-typescript": "^7.28.5",
+    "babel-jest": "^30.2.0",
+    "dotenv": "^17.2.3"
   }
 }

@@ -25,6 +25,7 @@ audit.json
 .env.development.local
 .env.test.local
 .env.production.local
+.env.test
 
 # Editor directories and files
 .vscode/
