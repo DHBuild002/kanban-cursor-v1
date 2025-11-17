@@ -1,6 +1,10 @@
 import React from 'react';
 
-const DoneList: React.FC = () => {
+interface DoneListProps {
+  userData: any;
+}
+
+const DoneList: React.FC<DoneListProps> = ({ userData }) => {
     return (
         <div className="list">
             <h3 className="list-title">Done</h3>

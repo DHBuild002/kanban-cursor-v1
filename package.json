@@ -6,6 +6,7 @@
     "node": ">=20.0.0"
   },
   "dependencies": {
+    "@supabase/supabase-js": "^2.81.0",
     "@testing-library/jest-dom": "^6.1.4",
     "@testing-library/react": "^14.1.2",
     "@testing-library/user-event": "^14.5.1",
@@ -13,6 +14,8 @@
     "@types/node": "^20.10.0",
     "@types/react": "^18.2.39",
     "@types/react-dom": "^18.2.17",
+    "concurrently": "^9.2.1",
+    "jwt-decode": "^4.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^7.9.5",
@@ -31,10 +34,11 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "jest --config jest.config.js",
     "test:ci": "CI=true react-scripts test --watchAll=false --runInBand",
     "typecheck": "tsc --noEmit",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "dev": "concurrently \"node server/index.js\" \"npm start\""
   },
   "eslintConfig": {
     "extends": [
@@ -53,5 +57,12 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@babel/preset-env": "^7.28.5",
+    "@babel/preset-react": "^7.28.5",
+    "@babel/preset-typescript": "^7.28.5",
+    "babel-jest": "^30.2.0",
+    "dotenv": "^17.2.3"
   }
 }

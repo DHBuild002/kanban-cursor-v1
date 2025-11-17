@@ -2,13 +2,15 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import Avatar from './Avatar';
 import './Header.css';
+import './LogOutBtn.css';
 import { useAuth } from '../../context/AuthContext'; // Import useAuth
+import { supabase } from '../../supabaseClient';
 
 const Header: React.FC = () => {
-    const { isAuthenticated, logout } = useAuth();
+    const { isAuthenticated } = useAuth();
 
-    const handleLogout = () => {
-        logout();
+    const handleLogout = async () => {
+        await supabase.auth.signOut();
     };
 
     return (
@@ -18,12 +20,12 @@ const Header: React.FC = () => {
                 {isAuthenticated ? (
                     <>
                         {/* Optionally display user info here */}
-                        <button onClick={handleLogout}>Logout</button>
+                        <button className='logout-button' onClick={handleLogout}>Logout</button>
                     </>
                 ) : (
                     <>
-                        <Link to="/login">Login</Link>
-                        <Link to="/register">Register</Link>
+                        <Link to="/login" className="nav-link">Login</Link>
+                        <Link to="/register" className="nav-link">Register</Link>
                     </>
                 )}
             </nav>

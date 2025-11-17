@@ -1,0 +1,19 @@
+/* logout-button.css */
+.logout-button {
+  padding: 10px 15px;
+  font-weight: 500;
+  font-size: 14px;
+  border-radius: 10px; /* curved edges */
+  background-color: #ffffff; /* button background */
+  color: #333333; /* text color */
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  /* transition: all 0.3s ease; */
+  border: 1px solid #e5e7eb;
+}
+
+/* Hover effect */
+.logout-button:hover {
+  background-color: #f9fafb;
+}

@@ -2,6 +2,7 @@
 
 # dependencies
 /node_modules
+/server/node_modules
 /.pnp
 .pnp.js
 
@@ -20,10 +21,12 @@ audit.json
 
 # misc
 .DS_Store
+.env*
 .env.local
 .env.development.local
 .env.test.local
 .env.production.local
+.env.test
 
 # Editor directories and files
 .vscode/
@@ -32,3 +35,6 @@ audit.json
 
 # Backup files
 *.backup
+
+#Test Credentials
+test-credentials.json

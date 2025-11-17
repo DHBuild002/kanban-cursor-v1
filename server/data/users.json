@@ -1,14 +1,1 @@
-[
-  {
-    "id": "b3f82834-05c8-49b0-b64c-e5df19dd6248",
-    "username": "testuser",
-    "email": "test@example.com",
-    "passwordHash": "$2b$10$IYqX6Jsr4L3.0e0dFhGSE.UJwt06AH2JSgQGvTuzOkuSlty7xWpmi"
-  },
-  {
-    "id": "bed0efd2-618b-458a-97b3-d1d03ae03550",
-    "username": "dan",
-    "email": "dan@boardom.com",
-    "passwordHash": "$2b$10$aJ.UY2r2.7dzVSu5VEF3qevTWCW3NECdTh0wIJioZKg1Lbcchv5GK"
-  }
-]
+[]

@@ -8,6 +8,27 @@
   border-bottom: 1px solid rgba(0,0,0,0.06);
 }
 
+nav {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+.nav-link {
+    padding: 10px 15px;
+    font-weight: 500;
+    font-size: 14px;
+    border-radius: 10px;
+    background-color: #ffffff;
+    color: #333333;
+    border: 1px solid #e5e7eb;
+    text-decoration: none;
+}
+
+.nav-link:hover {
+    background-color: #f9fafb;
+}
+
 .avatar img {
   width: 36px;
   height: 36px;
